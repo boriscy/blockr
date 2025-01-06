@@ -5,7 +5,7 @@ defmodule Blockr.MixProject do
     [
       app: :blockr,
       version: "0.1.0",
-      elixir: "~> 1.17",
+      elixir: "~> 1.18.1",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
