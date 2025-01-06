@@ -1,0 +1,66 @@
+<!-- livebook:{"autosave_interval_s":30} -->
+
+# Blockr
+
+```elixir
+import IEx.Helpers
+```
+
+## Requirements
+
+To start the blockr program you have to join to a session of blockr
+Got to the project root and start server
+
+> iex --name test@127.0.0.1 --cookie mycookie -S mix
+
+Then in **livebook** connect with the parameters used for the session
+
+<!-- livebook:{"break_markdown":true} -->
+
+Last login: Mon Jan 6 12:31:12 on ttys004
+❯ cd dev/elixir
+❯ cd blockr-live
+❯ ls
+blockr.ex.livemd
+❯ cat blockr.ex.livemd
+
+```elixir
+p = Point.new(1,1)
+|> Point.move_down()
+|> Point.move_down()
+|> Point.move_right()
+|> Point.move_right()
+
+Canvas.new(p)
+```
+
+## Multiple points
+
+```elixir
+points = [
+  Point.new(1,5), Point.new(2,5), Point.new(3,5), Point.new(3,6)
+]
+
+#l = [Point.new(1,5), Point.new(2,5), Point.new(3,5), Point.new(3,6)]
+
+#l = Shape.move_right(l)
+
+Canvas.tetromino(points)
+```
+
+```elixir
+defmodule Spinner do
+  def swap({row, col}) do
+    {col, row}
+  end
+end
+```
+
+```elixir
+# min_y = 1, max_y = 3 :: min_x = 5, max_x = 6
+points = [
+  Point.new(1,5), Point.new(2,5), Point.new(3,5), Point.new(3,6)
+]
+
+points |> Shape.rotate(90) |> Canvas.tetromino()
+```
