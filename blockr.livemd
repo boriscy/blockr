@@ -4,6 +4,7 @@
 
 ```elixir
 import IEx.Helpers
+alias Blockr.{Point, Canvas, Shape, Tetromino}
 ```
 
 ## Requirements
@@ -63,4 +64,30 @@ points = [
 ]
 
 points |> Shape.rotate(90) |> Canvas.tetromino()
+```
+
+## Check how to generate each figure
+
+```elixir
+Tetromino.new(%{name: :t}) |> Tetromino.to_group() |> Canvas.tetromino()
+```
+
+```elixir
+Tetromino.new(%{name: :l}) |> Tetromino.to_group() |> Canvas.tetromino()
+```
+
+```elixir
+Tetromino.new(%{name: :j}) |> Tetromino.to_group() |> Canvas.tetromino()
+```
+
+```elixir
+Tetromino.new(%{name: :i}) |> Tetromino.to_group() |> Canvas.tetromino()
+```
+
+```elixir
+Tetromino.new(%{name: :s}) |> Tetromino.to_group() |> Canvas.tetromino()
+```
+
+```elixir
+Tetromino.new(%{name: :z}) |> Tetromino.to_group() |> Canvas.tetromino()
 ```

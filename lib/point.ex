@@ -1,23 +1,24 @@
-defmodule Point do
-  def new(row, col) do
-    {row, col}
+defmodule Blockr.Point do
+  def new(x, y) do
+    {x, y}
   end
 
-  def move_down({row, col}) do
-    {row + 1, col}
+  def move_down({x, y}) do
+    # {row + 1, col}
+    {x, y + 1}
   end
 
-  def move_left({row, col}) do
-    case col > 1 do
-      true -> {row, col - 1}
-      false -> {row, col}
+  def move_left({x, y}) do
+    case x > 1 do
+      true -> {x - 1, y}
+      false -> {x, y}
     end
   end
 
-  def move_right({row, col}) do
-    case col < 9 do
-      true -> {row, col + 1}
-      false -> {row, col}
+  def move_right({x, y}) do
+    case x < 9 do
+      true -> {x + 1, y}
+      false -> {x, y}
     end
   end
 end

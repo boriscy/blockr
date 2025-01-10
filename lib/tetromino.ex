@@ -1,6 +1,8 @@
-defmodule Tetromino do
+defmodule Blockr.Tetromino do
+  alias Blockr.{Point, Canvas, Tetromino}
+
   defstruct name: :i,
-            location: {1, 3},
+            location: {3, 1},
             rotation: 0,
             color: :blue
 
@@ -17,18 +19,92 @@ defmodule Tetromino do
   end
 
   def fall(tetro) do
-    %{tetro | location: Point.move_down(tetro.location)}
+    %__MODULE__{tetro | location: Point.move_down(tetro.location)}
   end
 
   def rotate_right(tetro) do
-    %{tetro | rotation: Integer.mod(tetro.rotation + 90, 360)}
+    %__MODULE__{tetro | rotation: Integer.mod(tetro.rotation + 90, 360)}
   end
 
-  def to_group(%{shape: :t} = tetro) do
+  # :t, 0
+  # def to_group(%__MODULE__{name: :t, rotation: 0} = tetro) do
+  #  Canvas.tetromino([Point.new(1, 5), Point.new(2, 5), Point.new(3, 5), Point.new(2, 6)])
+  # end
+
+  # :t, 0
+  def to_group(%__MODULE__{name: :t, rotation: 0} = tetro) do
+    %__MODULE__{tetro | location: Point.move_right(tetro.location)}
+    {x, y} = tetro.location
+
     [
-      %{tetro | location: Point.move_down(tetro.location)},
-      %{tetro | location: Point.move_down(Point.move_down(tetro.location))},
-      %{tetro | location: Point.move_down(Point.move_down(Point.move_down(tetro.location)))}
+      Point.new(x, y),
+      Point.new(x + 1, y),
+      Point.new(x + 2, y),
+      Point.new(x + 1, y + 1)
+    ]
+  end
+
+  def to_group(%__MODULE__{name: :l, rotation: 0} = tetro) do
+    %__MODULE__{tetro | location: Point.move_down(tetro.location)}
+    {x, y} = tetro.location
+
+    [
+      Point.new(x, y),
+      Point.new(x, y + 1),
+      Point.new(x, y + 2),
+      Point.new(x + 1, y + 2)
+    ]
+  end
+
+  def to_group(%__MODULE__{name: :j, rotation: 0} = tetro) do
+    %__MODULE__{tetro | location: Point.move_down(tetro.location)}
+    {x, y} = tetro.location
+    x = if x == 1, do: 2, else: x
+
+    [
+      Point.new(x, y),
+      Point.new(x, y + 1),
+      Point.new(x, y + 2),
+      Point.new(x - 1, y + 2)
+    ]
+  end
+
+  def to_group(%__MODULE__{name: :i, rotation: 0} = tetro) do
+    %__MODULE__{tetro | location: Point.move_down(tetro.location)}
+    {x, y} = tetro.location
+
+    [
+      Point.new(x, y),
+      Point.new(x, y + 1),
+      Point.new(x, y + 2),
+      Point.new(x, y + 3)
+    ]
+  end
+
+  def to_group(%__MODULE__{name: :s, rotation: 0} = tetro) do
+    %__MODULE__{tetro | location: Point.move_down(tetro.location)}
+    {x, y} = tetro.location
+
+    x = if x > 6, do: 6, else: x
+
+    [
+      Point.new(x, y),
+      Point.new(x + 1, y),
+      Point.new(x + 1, y + 1),
+      Point.new(x + 2, y + 1)
+    ]
+  end
+
+  def to_group(%__MODULE__{name: :z, rotation: 0} = tetro) do
+    %__MODULE__{tetro | location: Point.move_down(tetro.location)}
+    {x, y} = tetro.location
+    x = if x < 3, do: 3, else: x
+
+    [
+      Point.new(x, y),
+      Point.new(x - 1, y),
+      Point.new(x - 1, y + 1),
+      Point.new(x - 2, y + 1)
     ]
   end
 
